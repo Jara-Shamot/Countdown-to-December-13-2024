@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Countdown to December 13, 2024</title>
+    <title>Countdown to December 13, 2024</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,6 +12,7 @@
             color: #fff;
             margin: 0;
             padding: 20px;
+            overflow: hidden;
         }
         h1 {
             color: #fff;
@@ -34,7 +35,6 @@
             animation: neon-glow 1.5s infinite alternate;
             transition: box-shadow 1s ease-in-out;
         }
-
         /* Neon Glow Animation */
         @keyframes neon-glow {
             0% {
@@ -68,19 +68,54 @@
             border: 2px solid #00ffff;
             box-shadow: 0 0 10px #00ffff, 0 0 30px #00ffff;
         }
+
+        /* Vuurwerk sectie (zichtbaar bij einde van countdown) */
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 48px;
+            animation: fireworks-show 1s infinite;
+        }
+
+        /* Fireworks animation */
+        @keyframes fireworks-show {
+            0% { background-color: #000; }
+            50% { background-color: rgba(0, 0, 0, 0.5); }
+            100% { background-color: #000; }
+        }
     </style>
 </head>
 <body>
-    <h1>Neon Countdown to December 13, 2024</h1>
+    <h1>Countdown to December 13, 2024</h1>
     <div class="countdown" id="countdown-timer">
         Loading...
     </div>
 
+    <!-- Vuurwerk en bericht -->
+    <div class="fireworks" id="fireworks">
+        <div>Valkenburg wacht op je!</div>
+    </div>
+
     <script>
         function updateCountdown() {
-            const targetDate = new Date('2024-12-13T00:00:00');
+            const targetDate = new Date('2024-12-13T16:30:00');
             const currentDate = new Date();
             const difference = targetDate - currentDate;
+
+            if (difference <= 0) {
+                // Countdown is voorbij, start vuurwerk!
+                document.getElementById('countdown-timer').style.display = 'none';
+                document.getElementById('fireworks').style.display = 'flex';
+                return;
+            }
 
             // Bereken de tijdseenheden
             const days = Math.floor(difference / (1000 * 60 * 60 * 24));
