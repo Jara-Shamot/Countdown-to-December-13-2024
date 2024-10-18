@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown to December 13, 2024</title>
+    <title>Neon Countdown to December 13, 2024</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f0f8ff;
+            background-color: #000;
+            color: #fff;
             margin: 0;
             padding: 20px;
         }
         h1 {
-            color: #333;
+            color: #fff;
+            margin-bottom: 40px;
         }
         .countdown {
             display: flex;
@@ -25,30 +27,51 @@
         .time-segment {
             font-size: 36px;
             padding: 20px;
-            background-color: #1e90ff;
-            color: white;
             border-radius: 10px;
-            animation: pulse 1s infinite;
-            opacity: 0;
-            animation: fadeIn 2s forwards, pulse 2s infinite;
+            box-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff;
+            color: #fff;
+            text-shadow: 0 0 10px #00ffff;
+            animation: neon-glow 1.5s infinite alternate;
+            transition: box-shadow 1s ease-in-out;
         }
 
-        /* Fade-in effect */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* Neon Glow Animation */
+        @keyframes neon-glow {
+            0% {
+                box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            }
+            50% {
+                box-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+            }
+            100% {
+                box-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+            }
         }
 
-        /* Pulse animation */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        /* Kleuren voor verschillende tijdseenheden */
+        .days {
+            border: 2px solid #ff00ff;
+            box-shadow: 0 0 10px #ff00ff, 0 0 30px #ff00ff;
+        }
+
+        .hours {
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 10px #00ff00, 0 0 30px #00ff00;
+        }
+
+        .minutes {
+            border: 2px solid #ff9900;
+            box-shadow: 0 0 10px #ff9900, 0 0 30px #ff9900;
+        }
+
+        .seconds {
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 10px #00ffff, 0 0 30px #00ffff;
         }
     </style>
 </head>
 <body>
-    <h1>Countdown to December 13, 2024</h1>
+    <h1>Neon Countdown to December 13, 2024</h1>
     <div class="countdown" id="countdown-timer">
         Loading...
     </div>
@@ -65,12 +88,12 @@
             const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-            // Update de countdown met animaties
+            // Update de countdown met neon frames en overgangen
             document.getElementById('countdown-timer').innerHTML = 
-                `<div class="time-segment">${days} Days</div>` +
-                `<div class="time-segment">${hours} Hours</div>` +
-                `<div class="time-segment">${minutes} Minutes</div>` +
-                `<div class="time-segment">${seconds} Seconds</div>`;
+                `<div class="time-segment days">${days} Days</div>` +
+                `<div class="time-segment hours">${hours} Hours</div>` +
+                `<div class="time-segment minutes">${minutes} Minutes</div>` +
+                `<div class="time-segment seconds">${seconds} Seconds</div>`;
         }
 
         // Update de countdown elke seconde
